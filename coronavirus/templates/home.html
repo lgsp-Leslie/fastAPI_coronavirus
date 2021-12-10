@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    <br>
+    <h1 class="ui center aligned header">新冠病毒疫情跟踪器</h1>
+    <br>
+    <div>
+        <div class="ui input">
+            <input id="city" type="text" placeholder="输入城市">
+        </div>
+        <button id="filter" type="submit" class="ui primary button">过滤</button>
+        <button id="sync" type="submit" class="ui red button ">同步数据</button>
+    </div>
+    <div>
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th>城市</th>
+                <th>日期</th>
+                <th>累计确诊数</th>
+                <th>累计死亡数</th>
+                <th>累计痊愈数</th>
+                <th>更新时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.city.province }}</td>
+                <td>{{ item.date }}</td>
+                <td>{{ item.confirmed }}</td>
+                <td>{{ item.deaths }}</td>
+                <td>{{ item.recovered }}</td>
+                <td>{{ item.updated_at }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', path='js/home.js') }}"></script>
+{% endblock %}
